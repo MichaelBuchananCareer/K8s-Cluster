@@ -1,0 +1,24 @@
+---
+#Run modprobe commands
+- name: Apply modprobe overlay
+  community.general.modprobe:
+    name: overlay
+    state: present
+
+- name: Apply modprobe br_netfilter
+  community.general.modprobe:
+    name: br_netfilter
+    state: present
+
+
+#Create network rules
+- name: Apply Kubernetes config file template
+  template:
+    src: ../templates/kubernetes.conf.j2
+    dest: /etc/sysctl.d/kubernetes.conf
+
+- name: Apply Containerd config file template
+  template:
+    src: ../templates/containerd.conf.j2
+    dest: /etc/modules-load.d/containerd.conf
+

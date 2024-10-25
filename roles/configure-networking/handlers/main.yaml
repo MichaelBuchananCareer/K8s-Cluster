@@ -1,0 +1,3 @@
+---
+- name: restart systemctl to apply networking
+  shell: sudo systemctl -p --system

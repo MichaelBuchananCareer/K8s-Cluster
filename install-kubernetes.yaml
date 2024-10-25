@@ -1,0 +1,13 @@
+- name: Install Kubernetes
+  hosts: all
+  remote_user: *****
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: yes
+
+
+- name: Run Master Install
+  hosts: masters
+  roles:
+  - run-master-commands

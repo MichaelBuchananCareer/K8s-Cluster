@@ -1,0 +1,11 @@
+---
+#Check if the worker already is in the cluster
+- name: Check if worker is in cluster
+  stat:
+    path: /etc/kubernetes/kubelet.conf
+  register: cluster_status
+
+#join the cluster
+- name: Join the cluster
+  shell: "sudo {{ hostvars['k8s-master.buchcolab.com']['join_command'] }} --ignore-preflight-errors=all"
+  when:  not cluster_status.stat.exists
